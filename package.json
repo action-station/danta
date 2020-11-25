@@ -1,5 +1,5 @@
 {
-  "name": "danta_sample",
+  "name": "danta",
   "license": "GPL-3.0",
   "scripts": {
     "dev": "node -r esm ./scripts/dev.js"
@@ -8,6 +8,8 @@
     "axios": "^0.20.0"
   },
   "devDependencies": {
+    "@contentful/rich-text-html-renderer": "^14.1.2",
+    "contentful": "^7.14.14",
     "dotenv-json": "^1.0.0",
     "esm": "^3.2.25",
     "mustache": "^4.0.1",
