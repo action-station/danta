@@ -1,4 +1,4 @@
-import dotenvJSON from 'dotenv-json'
+import {render} from 'mustache'
 import {
   existsSync as file_exists,
   writeFileSync as file_write,
@@ -6,55 +6,56 @@ import {
 } from 'fs'
 import {execSync as exec} from 'child_process'
 import path from 'path'
-import {set_env, fetch_data, build_html} from './build'
+import {set_env, get_data, get_file_data} from './build'
+import {get_templates} from '../lib/templates'
 
 set_env('dev')
 
-const get_nav = ({pages, extra_nav_links}) => {
-  const nav_links = pages.map(({name, title}) => (
-    {url: `/${name}.html`, label: title}
-  ))
-
-  return extra_nav_links ? [...nav_links, ...extra_nav_links] : nav_links
-}
-
 async function build_dev() {
-  const data = await fetch_data('dev')
-  const nav = get_nav(data)
-
-  console.log(data)
-
-  // building navigation
-  console.log(nav)
-
-  /*
-  const html = await build_html(data)
-
-  // TODO, support constants in webpack.config.js
-  //exec('webpack')
-
-  // TODO run scss
+  // build css (should scss be used instead?)
   exec('yarn sass ./client/scss/index.scss dist/index.css')
 
-  const injected_html = html
-    .replace('</head>', `
-        <link rel="stylesheet" href="/index.css">
-      </head>
-    `)
+  // get all templates, one per content type in the cms
+  const templates = get_templates()
 
-  // TODO: minify html
-  file_write('./dist/index.html', injected_html)
+  // fetch all data
+  const data = await get_data('dev')
+
+  // get file related data
+  const file_data = await get_file_data(data)
+
+  // build html
+  for(const {name, template_name, data: template_data} of file_data) {
+    const {[template_name]: template, ...partials} = templates
+    const html = render(template, {...template_data, common: data}, partials)
+
+    // inject css file
+    const injected_html = html
+      .replace('</head>', `
+          <link rel="stylesheet" href="/index.css">
+        </head>
+      `)
+
+    // TODO: minify html
+    file_write(`./dist/${name}.html`, injected_html)
+  }
+
+  /*
+  // TODO, support constants in webpack.config.js
+  //exec('webpack')
   */
 }
 
 /*
-const StaticServer = require('static-server')
-const server = new StaticServer({rootPath: './dist', port: 3000, cors: '*', followSymlink: true})
-
 server.on('request',  async (req, res) => await build_dev())
-server.start(() => console.log('danta app running on', server.port))
 */
 
 //setInterval(async () => await build_dev(), 1000)
 
-(async () => await build_dev())()
+(async () => {
+  await build_dev()
+
+  const StaticServer = require('static-server')
+  const server = new StaticServer({rootPath: './dist', port: 3000, cors: '*', followSymlink: true})
+  server.start(() => console.log('danta app running on', server.port))
+})()
