@@ -1,13 +1,7 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+{{> layout/top}}
 
-    <title>{{common.title}} | {{title}}</title>
-  </head>
-  <body>
-    <h1>{{title}}</h1>
-    {{{raw_content}}}
-  </body>
-</html>
+<h1>{{title}}</h1>
+
+{{{raw_content}}}
+
+{{> layout/bottom}}

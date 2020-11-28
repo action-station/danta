@@ -1,19 +1,19 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+{{> layout/top}}
 
-    <title>{{common.title}} | {{title}}</title>
-  </head>
-  <body>
-    <h1>{{title}}</h1>
-    {{{content}}}
+<h1>{{title}}</h1>
 
-    <hr>
+{{{content}}}
 
-    {{#pages}}
-      {{name}}: {{title}}
-    {{/pages}}
-  </body>
-</html>
+<div class="row row-cols-1 row-cols-md-3">
+  {{#pages}}
+    <div class="col mb-3">{{> components/list-page-entry}}</div>
+  {{/pages}}
+  {{#pages}}
+    <div class="col mb-3">{{> components/list-page-entry}}</div>
+  {{/pages}}
+  {{#pages}}
+    <div class="col mb-3">{{> components/list-page-entry}}</div>
+  {{/pages}}
+</div>
+
+{{> layout/bottom}}

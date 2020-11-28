@@ -15,10 +15,13 @@ async function build_dev() {
   // build css (should scss be used instead?)
   exec('yarn sass ./client/scss/index.scss dist/index.css')
 
+  // TODO, support constants in webpack.config.js
+  //exec('webpack')
+
   // get all templates, one per content type in the cms
   const templates = get_templates()
 
-  // fetch all data
+  // get data from the cms
   const data = await get_data('dev')
 
   // get file related data
@@ -39,23 +42,11 @@ async function build_dev() {
     // TODO: minify html
     file_write(`./dist/${name}.html`, injected_html)
   }
-
-  /*
-  // TODO, support constants in webpack.config.js
-  //exec('webpack')
-  */
 }
 
-/*
-server.on('request',  async (req, res) => await build_dev())
-*/
-
-//setInterval(async () => await build_dev(), 1000)
-
 (async () => {
-  await build_dev()
-
   const StaticServer = require('static-server')
   const server = new StaticServer({rootPath: './dist', port: 3000, cors: '*', followSymlink: true})
+  server.on('request',  async (req, res) => await build_dev())
   server.start(() => console.log('danta app running on', server.port))
 })()

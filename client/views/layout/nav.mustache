@@ -1,0 +1,15 @@
+<nav class="navbar navbar-light bg-light flex-md-nowrap shadow">
+  <a class="navbar-brand flex-grow-1 mr-0" href="/" aria-label="ActionStation Members">
+    <div class="h3">{{common.title}}</div>
+  </a>
+
+  <div id="navbar_links" class="mt-2 mb-1" aria-label="Navigation">
+    <ul class="nav nav-pills">
+      {{#common.nav}}
+      <li class="nav-item" aria-label="TBD">
+        <a id="nav_{{index}}" class="nav-link" href="{{url}}">{{label}}</a>
+      </li>
+      {{/common.nav}}
+    </ul>
+  </div>
+</nav>

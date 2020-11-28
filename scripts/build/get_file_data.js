@@ -8,9 +8,14 @@
  */
 
 export async function get_file_data(data) {
-  return data.pages.map((p, i) => ({
+  let pages = data.pages
+  for(const page of pages) { // only support one level of pages
+    pages = [...pages, ...(page.pages || [])]
+  }
+
+  return pages.map((p, i) => ({
     name: i === 0 ? 'index' : p.name,
-    template_name: p._template,
+    template_name: p.content_type,
     data: p
   }))
 }
