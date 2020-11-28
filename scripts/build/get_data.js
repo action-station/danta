@@ -49,7 +49,7 @@ export async function get_data() {
   }
   else {
     data = await contentful_get_data({
-      content_type: 'site', 'fields.name': 'site-test'
+      content_type: 'site', 'fields.name': 'annual-report-2020'
     })
     file_write(data_file, JSON.stringify(data))
   }
