@@ -1,3 +1,15 @@
 body {
-  background-color: #ddd;
+  background-color: #fff;
+}
+
+ul.nav li {
+  a {
+    color: #fff;
+  }
+}
+
+footer nav a.nav-link {
+  color: #fff;
+  padding: 0;
+  margin-bottom: 0.5em;
 }

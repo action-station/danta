@@ -2,9 +2,11 @@
 
 <h1>{{title}}</h1>
 
+<div class="my-3">
 {{{content}}}
+</div>
 
-<div class="row row-cols-1 row-cols-md-3">
+<div class="row row-cols-1 row-cols-md-3 mt-4">
   {{#pages}}
     <div class="col mb-3">{{> components/list-page-entry}}</div>
   {{/pages}}
