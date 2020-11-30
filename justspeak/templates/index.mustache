@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {{> head}}
+  </head>
+  <body>
+    {{> preloader}}
+
+    {{> navigation}}
+
+    <!-- fullPage start -->
+    <div id="fullpage">
+      {{#cards}}
+
+      <div id="section_{{name}}" class="section section_{{name}}" style="{{background}}">
+        <span role="img" aria-label="{{bg_description}}"></span>
+
+        <a class="logo element-color-switch">
+          <img src="{{logo}}" width="120" />
+        </a>
+
+        <div class="center-container-home">
+          <div class="section_content">
+            <div class="section_content_inner">
+              <h2 class="section-heading">
+                {{&title}}
+              </h2>
+              <h2 class="section-subheading">
+                {{byline}}
+              </h2>
+              <div class="title_byline_divider"></div>
+              {{&content}}
+            </div>
+          </div>
+        </div>
+
+        <hr class="sr-only" />
+
+        {{#show_footer}}
+        <!-- bottom credits start -->
+        <div class="bottom-credits fadeIn-element">
+          <a class="link-underline" href="https://www.justspeak.org.nz/">JustSpeak</a>
+          {{&footer}}
+        </div>
+        <!-- bottom credits end -->
+        {{/show_footer}}
+
+        {{#scroll_indicator}}
+        <div class="scroll-indicator-wrapper fadeIn-element">
+          <a href="{{scroll_link}}" class="scroll-indicator"></a>
+        </div>
+        {{/scroll_indicator}}
+
+        <!-- sub cards -->
+
+        {{#has_sub_cards}}
+        <div id="{{sub_cards_name}}" class="sub_cards">
+          <div class="sub_cards_close" data-container="{{sub_cards_name}}"></div>
+          <div class="sub_card_container">
+        {{/has_sub_cards}}
+
+        {{#sub_cards}}
+          {{> sub_card}}
+        {{/sub_cards}}
+
+        {{#has_sub_cards}}
+          </div>
+        </div>
+        {{/has_sub_cards}}
+      </div>
+
+      {{/cards}}
+    </div>
+    <!-- fullPage end -->
+
+    <div class="modal fade" tabindex="-1" id="join_mailing_list" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title h3">Join our mailing list</h4>
+          </div>
+          <div class="modal-body">
+            <iframe style="width:100%;min-width:320px;max-width:780px;height:90vh;border:0;" src="https://connect.vega.works/Content/csharp/registration.aspx?rfD3x0k=E947DF7A-96D4-4D4F-BDB3-048439395C2B&amp;xlnse5=1421"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- scripts start -->
+    <script>
+    const CARD_ANCHORS = [{{#cards}}'{{name}}',{{/cards}}];
+    const CARD_TOOLTIPS = [{{#cards}}'{{title}}',{{/cards}}];
+    const SUB_CARD_CONTAINERS = [
+      {{#cards}}
+        {{#has_sub_cards}}'{{sub_cards_name}}',{{/has_sub_cards}}
+      {{/cards}}
+    ];
+
+    document.querySelector("a.instagram").href = "{{&instagram_video_url}}";
+    </script>
+    <script src="{{slug}}/js/plugins.js"></script>
+    <script src="{{slug}}/js/dexa.js"></script>
+
+    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+    <script src="{{slug}}/js/sub_cards.js"></script>
+    <!-- scripts end -->
+  </body>
+</html>

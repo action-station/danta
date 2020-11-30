@@ -1,0 +1,39 @@
+<!-- navigation start -->
+<div class="navigation-fire navigation-icon-wrapper fadeIn-element">
+    <div class="navigation-icon" id="navigation-icon">
+        <span class="line"></span> <span class="line"></span> <span class="line"></span>
+    </div>
+</div>
+<nav class="navigation-menu">
+  <div class="row">
+    {{#menu_items.top_left}}
+    <div class="col-xs-6 nopadding top_left" style="{{background}}">
+      <span role="img" aria-label="{{bg_description}}"></span>
+      <a href="{{url}}">{{label}}</a>
+    </div>
+    {{/menu_items.top_left}}
+
+    {{#menu_items.top_right}}
+    <div class="col-xs-6 nopadding top_right" style="{{background}}">
+      <span role="img" aria-label="{{bg_description}}"></span>
+      <a href="{{url}}" target="_js_external">{{label}}</a>
+    </div>
+    {{/menu_items.top_right}}
+  </div>
+  <div class="row">
+    {{#menu_items.bottom_left}}
+    <div class="col-xs-6 nopadding bottom_left" style="{{background}}">
+      <span role="img" aria-label="{{bg_description}}"></span>
+      <a href="{{url}}" target="_js_external">{{label}}</a>
+    </div>
+    {{/menu_items.bottom_left}}
+
+    {{#menu_items.bottom_right}}
+    <div class="col-xs-6 nopadding bottom_right" style="{{background}}">
+      <span role="img" aria-label="{{bg_description}}"></span>
+      <a href="{{url}}" target="_js_external">{{label}}</a>
+    </div>
+    {{/menu_items.bottom_right}}
+  </div>
+</nav>
+<!-- navigation end -->
